@@ -28,7 +28,10 @@ def create_list(data_dir, list_dir, slash):
     random.shuffle(data_list)
     train_list = data_list[split_index:]
     test_list = data_list[:split_index]
-    os.mkdir(list_dir)
+    try:
+        os.mkdir(list_dir)
+    except OSError:
+        print('Directory ./{0} already exists.'.format(list_dir))
     f = open(os.path.join('.', list_dir, 'class.lst'), 'w')
     f.write('\n'.join(classes))
     f.close()
